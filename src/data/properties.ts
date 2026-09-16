@@ -603,8 +603,8 @@ export function formatDate(iso: string, opts: Intl.DateTimeFormatOptions = { day
 }
 
 export function bedroomsLabel(p: Pick<Property, "bedrooms" | "type">): string | null {
-  if (COMMERCIAL_TYPES.includes(p.type)) return null;
-  if (p.bedrooms === 0) return "Studio";
+  if (COMMERCIAL_TYPES.includes(p.type) || p.type === "Studio") return null;
+  if (p.bedrooms === 0) return "Studio layout";
   return `${p.bedrooms} ${p.bedrooms === 1 ? "bed" : "beds"}`;
 }
 

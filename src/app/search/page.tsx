@@ -1,27 +1,33 @@
-"use client";
+import type { Metadata } from "next";
+import { Suspense } from "react";
+import SearchClient from "@/components/search/SearchClient";
 
-import { Search } from "lucide-react";
-import ComingSoon from "@/components/ComingSoon";
-import { PropertyMap } from "@/components/map";
-import { usePublishedListings } from "@/context/AppContext";
+export const metadata: Metadata = {
+  title: "Search properties",
+  description:
+    "Filter verified rentals, homes for sale, flat shares and commercial spaces across six German cities by type, budget, bedrooms and more.",
+};
+
+function SearchFallback() {
+  return (
+    <div className="mx-auto max-w-7xl px-4 pb-20 pt-10 sm:px-6 lg:px-8">
+      <div className="h-10 w-72 animate-pulse rounded-btn bg-sand" />
+      <div className="mt-8 grid gap-8 lg:grid-cols-[280px_1fr]">
+        <div className="hidden h-[520px] animate-pulse rounded-card bg-sand lg:block" />
+        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          {Array.from({ length: 6 }, (_, i) => (
+            <div key={i} className="h-80 animate-pulse rounded-card bg-sand" />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function SearchPage() {
-  const published = usePublishedListings();
-
   return (
-    <ComingSoon
-      icon={Search}
-      eyebrow="Search"
-      title="Find your next home or workspace"
-      description={`${published.length} verified listings across Germany. Full filtering by intent, type, city and budget is on the way.`}
-      planned={[
-        "Filters for Rent, Buy and Share",
-        "Property type, city, price and size filters",
-        "List and map view side by side",
-        "Save searches and favourite listings",
-      ]}
-    >
-      <PropertyMap properties={published} className="h-[28rem]" />
-    </ComingSoon>
+    <Suspense fallback={<SearchFallback />}>
+      <SearchClient />
+    </Suspense>
   );
 }
