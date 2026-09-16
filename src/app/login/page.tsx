@@ -37,11 +37,11 @@ export default function LoginPage() {
               setRole(r);
               router.push("/");
             }}
-            className={`rounded-2xl border bg-white p-6 text-left shadow-soft transition hover:-translate-y-0.5 hover:shadow-lift ${
-              role === r ? "border-accent" : "border-slate-100"
+            className={`rounded-card border bg-white p-6 text-left shadow-soft transition hover:-translate-y-0.5 hover:shadow-lift ${
+              role === r ? "border-navy" : "border-line"
             }`}
           >
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-navy text-white">
+            <span className="grid h-10 w-10 place-items-center rounded-btn bg-navy text-sun">
               <Icon className="h-5 w-5" />
             </span>
             <p className="mt-4 font-semibold text-navy">Continue as {r}</p>

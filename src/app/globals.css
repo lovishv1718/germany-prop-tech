@@ -2,21 +2,79 @@
 
 @theme inline {
   --color-navy: #0b1f3a;
-  --color-navy-light: #16325c;
-  --color-accent: #14b8a6;
-  --color-accent-dark: #0d9488;
-  --color-accent-soft: #ccfbf1;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --shadow-soft: 0 1px 2px rgb(11 31 58 / 0.04), 0 8px 24px rgb(11 31 58 / 0.06);
-  --shadow-lift: 0 2px 4px rgb(11 31 58 / 0.06), 0 16px 40px rgb(11 31 58 / 0.12);
+  --color-navy-800: #14305a;
+  --color-navy-950: #071528;
+  --color-sun: #f2b705;
+  --color-sun-dark: #d9a404;
+  --color-sun-soft: #fdf3d3;
+  --color-steel: #2e4c6d;
+  --color-steel-soft: #e6ecf3;
+  --color-verified: #14b8a6;
+  --color-verified-soft: #ddf6f2;
+  --color-sand: #f7f5f0;
+  --color-line: #e7e5df;
+
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-figtree), ui-sans-serif, sans-serif;
+
+  --radius-card: 14px;
+  --radius-btn: 10px;
+
+  --shadow-soft: 0 1px 2px rgb(11 31 58 / 0.04), 0 6px 20px rgb(11 31 58 / 0.06);
+  --shadow-lift: 0 2px 6px rgb(11 31 58 / 0.06), 0 18px 44px rgb(11 31 58 / 0.14);
+
+  --animate-toast-in: toast-in 220ms ease-out;
+  --animate-fade-in: fade-in 160ms ease-out;
+  --animate-pop-in: pop-in 200ms ease-out;
 }
 
-html {
-  scroll-behavior: smooth;
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes pop-in {
+  from { opacity: 0; transform: translateY(6px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-body {
-  background: #ffffff;
-  color: #0b1f3a;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: #ffffff;
+    color: var(--color-navy);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-sun);
+    outline-offset: 2px;
+  }
+}
+
+/* Leaflet popups inherit the app type instead of Leaflet's defaults. */
+.leaflet-container {
   font-family: var(--font-sans);
+}
+.leaflet-popup-content-wrapper {
+  border-radius: 14px;
+}
+.leaflet-popup-content {
+  margin: 12px;
 }

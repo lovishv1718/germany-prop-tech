@@ -18,7 +18,7 @@ export default function HomePage() {
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-      <p className="inline-flex items-center gap-2 rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent-dark">
+      <p className="inline-flex items-center gap-2 rounded-md bg-sand px-3 py-1 text-xs font-semibold text-navy">
         Viewing as {role}
       </p>
       <h1 className="mt-5 max-w-3xl text-4xl font-bold tracking-tight text-navy sm:text-5xl">
@@ -29,15 +29,15 @@ export default function HomePage() {
       </p>
       <Link
         href="/search"
-        className="mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-white shadow-soft transition hover:bg-accent-dark"
+        className="mt-8 inline-flex items-center gap-2 rounded-btn bg-sun px-6 py-3 font-semibold text-navy transition hover:bg-sun-dark"
       >
         Start searching <ArrowRight className="h-4 w-4" />
       </Link>
 
       <div className="mt-14 grid gap-4 sm:grid-cols-3">
         {stats.map(({ label, value, icon: Icon }) => (
-          <div key={label} className="rounded-2xl border border-slate-100 bg-white p-6 shadow-soft">
-            <Icon className="h-6 w-6 text-accent" />
+          <div key={label} className="rounded-card border border-line bg-white p-6 shadow-soft">
+            <Icon className="h-6 w-6 text-steel" />
             <p className="mt-4 text-3xl font-bold text-navy">{value}</p>
             <p className="text-sm text-slate-500">{label}</p>
           </div>

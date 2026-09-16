@@ -13,6 +13,8 @@ export type PropertyType =
   | "Store"
   | "Event Hall";
 
+export type Category = "Residential" | "Commercial";
+
 export type City = "Berlin" | "Munich" | "Hamburg" | "Frankfurt" | "Cologne" | "Stuttgart";
 
 export type PublisherType = "Landlord" | "Agent" | "Flatmate" | "Referral" | "Partner";
@@ -47,11 +49,18 @@ export interface Property {
   publisherName: string;
   publisherPhone: string;
   publisherEmail: string;
+  publisherId: string;
+  /** ISO date the listing was submitted or published; drives "newest" sorting. */
+  listedAt: string;
+  views: number;
+  /** A published listing the publisher has temporarily hidden from search. */
+  paused: boolean;
+  rejectReason?: string;
 }
 
 export const INTENTS: Intent[] = ["Rent", "Buy", "Share"];
 
-export const PROPERTY_TYPES: PropertyType[] = [
+export const RESIDENTIAL_TYPES: PropertyType[] = [
   "Studio",
   "1BHK",
   "2BHK",
@@ -60,10 +69,28 @@ export const PROPERTY_TYPES: PropertyType[] = [
   "Individual House",
   "Room Share",
   "Flat Share",
-  "Office Space",
-  "Store",
-  "Event Hall",
 ];
+
+export const COMMERCIAL_TYPES: PropertyType[] = ["Office Space", "Store", "Event Hall"];
+
+export const PROPERTY_TYPES: PropertyType[] = [...RESIDENTIAL_TYPES, ...COMMERCIAL_TYPES];
+
+export const categoryOf = (type: PropertyType): Category =>
+  COMMERCIAL_TYPES.includes(type) ? "Commercial" : "Residential";
+
+export const TYPE_DESCRIPTIONS: Record<PropertyType, string> = {
+  Studio: "Open-plan living for one, ideal for relocations",
+  "1BHK": "One bedroom with a separate living area",
+  "2BHK": "Two bedrooms for couples and small families",
+  "3BHK": "Three bedrooms with room to grow",
+  Apartment: "Classic Altbau and modern flats of every size",
+  "Individual House": "Detached houses, townhouses and villas",
+  "Room Share": "A private room in a shared apartment",
+  "Flat Share": "Join a WG with like-minded flatmates",
+  "Office Space": "Serviced desks to full office floors",
+  Store: "High-street retail and boutique units",
+  "Event Hall": "Venues for conferences, weddings and launches",
+};
 
 export const CITIES: City[] = ["Berlin", "Munich", "Hamburg", "Frankfurt", "Cologne", "Stuttgart"];
 
@@ -76,11 +103,97 @@ export const CITY_STATE: Record<City, string> = {
   Stuttgart: "Baden-Württemberg",
 };
 
+/** Districts offered in the listing form, with an approximate centre point for the map. */
+export const DISTRICTS: Record<City, { name: string; lat: number; lng: number }[]> = {
+  Berlin: [
+    { name: "Mitte", lat: 52.52, lng: 13.405 },
+    { name: "Prenzlauer Berg", lat: 52.5362, lng: 13.4178 },
+    { name: "Kreuzberg", lat: 52.4986, lng: 13.4034 },
+    { name: "Friedrichshain", lat: 52.5155, lng: 13.454 },
+    { name: "Charlottenburg", lat: 52.5167, lng: 13.3041 },
+    { name: "Neukölln", lat: 52.4811, lng: 13.4353 },
+  ],
+  Munich: [
+    { name: "Altstadt", lat: 48.1372, lng: 11.5756 },
+    { name: "Schwabing", lat: 48.165, lng: 11.586 },
+    { name: "Maxvorstadt", lat: 48.1508, lng: 11.5705 },
+    { name: "Bogenhausen", lat: 48.15, lng: 11.62 },
+    { name: "Haidhausen", lat: 48.1296, lng: 11.5947 },
+    { name: "Sendling", lat: 48.1177, lng: 11.5456 },
+  ],
+  Hamburg: [
+    { name: "HafenCity", lat: 53.5413, lng: 9.997 },
+    { name: "Eimsbüttel", lat: 53.575, lng: 9.953 },
+    { name: "Sternschanze", lat: 53.5635, lng: 9.9655 },
+    { name: "Ottensen", lat: 53.552, lng: 9.928 },
+    { name: "Winterhude", lat: 53.5967, lng: 10.0006 },
+    { name: "St. Georg", lat: 53.5534, lng: 10.0144 },
+  ],
+  Frankfurt: [
+    { name: "Innenstadt", lat: 50.1109, lng: 8.682 },
+    { name: "Westend", lat: 50.118, lng: 8.66 },
+    { name: "Nordend", lat: 50.126, lng: 8.692 },
+    { name: "Sachsenhausen", lat: 50.1, lng: 8.685 },
+    { name: "Bornheim", lat: 50.1295, lng: 8.7111 },
+    { name: "Bockenheim", lat: 50.1219, lng: 8.6474 },
+  ],
+  Cologne: [
+    { name: "Altstadt-Nord", lat: 50.9413, lng: 6.9583 },
+    { name: "Neustadt-Nord", lat: 50.94, lng: 6.938 },
+    { name: "Ehrenfeld", lat: 50.95, lng: 6.918 },
+    { name: "Deutz", lat: 50.938, lng: 6.975 },
+    { name: "Lindenthal", lat: 50.93, lng: 6.905 },
+    { name: "Nippes", lat: 50.9661, lng: 6.9525 },
+  ],
+  Stuttgart: [
+    { name: "Mitte", lat: 48.7784, lng: 9.18 },
+    { name: "West", lat: 48.775, lng: 9.155 },
+    { name: "Nord", lat: 48.796, lng: 9.17 },
+    { name: "Degerloch", lat: 48.748, lng: 9.17 },
+    { name: "Bad Cannstatt", lat: 48.8049, lng: 9.2148 },
+    { name: "Vaihingen", lat: 48.7298, lng: 9.1087 },
+  ],
+};
+
 export const PUBLISHER_TYPES: PublisherType[] = ["Landlord", "Agent", "Flatmate", "Referral", "Partner"];
 
 export const LISTING_STATUSES: ListingStatus[] = ["Draft", "Pending", "Published", "Rejected"];
 
-const img = (id: string) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1200&q=80`;
+export const AMENITY_OPTIONS = [
+  "Balcony",
+  "Elevator",
+  "Fitted kitchen",
+  "Washing machine",
+  "Fibre internet",
+  "Parking",
+  "Cellar",
+  "Garden",
+  "Bike storage",
+  "Air conditioning",
+  "Pets allowed",
+  "Accessible",
+  "Anmeldung possible",
+  "Meeting rooms",
+  "24/7 access",
+  "Display windows",
+];
+
+/** The signed-in demo publisher. Listings with this publisherId appear in the Publisher dashboard. */
+export const DEMO_PUBLISHER = {
+  id: "pub-katrin-hoffmann",
+  name: "Katrin Hoffmann",
+  type: "Landlord" as PublisherType,
+  phone: "+49 30 5501 2231",
+  email: "k.hoffmann@example.com",
+};
+
+export const DEMO_TENANT = {
+  name: "Lukas Meyer",
+  email: "lukas.meyer@example.com",
+  phone: "+49 151 2345 6789",
+};
+
+const img = (id: string, w = 1200) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
 
 const IMAGES = {
   living: [
@@ -96,35 +209,46 @@ const IMAGES = {
     "1600607687939-ce8a6c25118c",
     "1600566753190-17f0baa2a6c3",
     "1560185007-cde436f6a4d0",
-  ].map(img),
+  ].map((id) => img(id)),
   house: [
     "1512917774080-9991f1c4c750",
     "1600596542815-ffad4c1539a9",
     "1600585154340-be6161a56a0c",
     "1564013799919-ab600027ffc6",
-  ].map(img),
+  ].map((id) => img(id)),
   office: [
     "1497366216548-37526070297c",
     "1497366811353-6870744d04b2",
     "1524758631624-e2822e304c36",
     "1497215728101-856f4ea42174",
-  ].map(img),
+  ].map((id) => img(id)),
   store: [
     "1441986300917-64674bd600d8",
     "1604719312566-8912e9227c6a",
     "1555529669-e69e7aa0ba9a",
     "1567401893414-76b7b1e5a7a5",
-  ].map(img),
+  ].map((id) => img(id)),
   event: [
     "1519167758481-83f550bb49b3",
     "1464366400600-7168b8af9bc3",
     "1511795409834-ef04bbd61622",
     "1505236858219-8359eb29e329",
-  ].map(img),
+  ].map((id) => img(id)),
 };
 
+export const CITY_IMAGES: Record<City, string> = {
+  Berlin: img("1560969184-10fe8719e047", 800),
+  Munich: img("1595867818082-083862f3d630", 800),
+  Hamburg: img("1553547274-0df401ae03c9", 800),
+  Frankfurt: img("1577185816322-21f2a92b1342", 800),
+  Cologne: img("1600081925754-e32c08c14c19", 800),
+  Stuttgart: img("1621978766642-2d64b83eed24", 800),
+};
+
+export const HERO_IMAGE = img("1502672260266-1c1ef2d93688", 1600);
+
 /** Picks 4 images for a listing, rotating through the pool so neighbours don't look identical. */
-function imagesFor(type: PropertyType, seed: number): string[] {
+export function imagesFor(type: PropertyType, seed: number): string[] {
   const pool =
     type === "Individual House"
       ? [...IMAGES.house, ...IMAGES.living]
@@ -138,7 +262,13 @@ function imagesFor(type: PropertyType, seed: number): string[] {
   return Array.from({ length: 4 }, (_, i) => pool[(seed * 3 + i) % pool.length]);
 }
 
-type Seed = Omit<Property, "id" | "state" | "images" | "pricePeriod"> & { pricePeriod?: PricePeriod };
+export const TYPE_IMAGES: Record<PropertyType, string> = Object.fromEntries(
+  PROPERTY_TYPES.map((t, i) => [t, imagesFor(t, i + 1)[0]]),
+) as Record<PropertyType, string>;
+
+type Seed = Omit<Property, "id" | "state" | "images" | "pricePeriod" | "publisherId" | "listedAt" | "views" | "paused"> & {
+  pricePeriod?: PricePeriod;
+};
 
 const seeds: Seed[] = [
   // Berlin
@@ -254,7 +384,7 @@ const seeds: Seed[] = [
     amenities: ["Fitted kitchen", "Bathtub", "Bike storage", "Cellar"],
     availableFrom: "2026-10-15", lat: 53.575, lng: 9.953,
     publisherType: "Landlord", verified: true, status: "Published",
-    publisherName: "Sabine Krüger", publisherPhone: "+49 40 8812 4455", publisherEmail: "s.krueger@example.com",
+    publisherName: "Katrin Hoffmann", publisherPhone: "+49 30 5501 2231", publisherEmail: "k.hoffmann@example.com",
   },
   {
     title: "Industrial Event Hall in Sternschanze",
@@ -311,7 +441,8 @@ const seeds: Seed[] = [
     amenities: ["Currently rented", "Cellar", "Near tram"],
     availableFrom: "2026-12-15", lat: 50.1, lng: 8.685,
     publisherType: "Landlord", verified: false, status: "Rejected",
-    publisherName: "Peter Wagner", publisherPhone: "+49 69 3321 9087", publisherEmail: "p.wagner@example.com",
+    publisherName: "Katrin Hoffmann", publisherPhone: "+49 30 5501 2231", publisherEmail: "k.hoffmann@example.com",
+    rejectReason: "Photos appear to show a different building. Please upload current photos of the unit.",
   },
   {
     title: "Renovated 3BHK in Nordend",
@@ -380,8 +511,8 @@ const seeds: Seed[] = [
     price: 1180, bedrooms: 1, sizeSqm: 45, furnished: true,
     amenities: ["Elevator", "Fitted kitchen", "Fibre internet"],
     availableFrom: "2026-10-01", lat: 48.7784, lng: 9.18,
-    publisherType: "Landlord", verified: true, status: "Published",
-    publisherName: "Julia Neumann", publisherPhone: "+49 711 2233 6600", publisherEmail: "j.neumann@example.com",
+    publisherType: "Landlord", verified: true, status: "Pending",
+    publisherName: "Katrin Hoffmann", publisherPhone: "+49 30 5501 2231", publisherEmail: "k.hoffmann@example.com",
   },
   {
     title: "Boutique Store in Stuttgart-West",
@@ -418,19 +549,98 @@ const seeds: Seed[] = [
   },
 ];
 
+// Days before 16 Sep 2026 each seed was listed, and its view count, in seed order.
+const LISTED_DAYS_AGO = [2, 1, 4, 9, 3, 12, 1, 6, 5, 8, 2, 3, 6, 14, 10, 4, 7, 11, 2, 18, 1, 13, 5, 20];
+const VIEWS = [1248, 986, 642, 311, 2104, 877, 45, 402, 1533, 690, 268, 0, 915, 188, 36, 1120, 745, 530, 22, 344, 18, 207, 0, 1890];
+
+const slug = (s: string) =>
+  s
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+
+export const TODAY = "2026-09-16";
+
+export function daysAgo(n: number): string {
+  const d = new Date(`${TODAY}T10:00:00Z`);
+  d.setUTCDate(d.getUTCDate() - n);
+  return d.toISOString();
+}
+
 export const properties: Property[] = seeds.map((seed, i) => ({
   ...seed,
   id: `ulg-${String(i + 1).padStart(3, "0")}`,
   state: CITY_STATE[seed.city],
   pricePeriod: seed.pricePeriod ?? (seed.intent === "Buy" ? "total" : "month"),
   images: imagesFor(seed.type, i),
+  publisherId: seed.publisherName === DEMO_PUBLISHER.name ? DEMO_PUBLISHER.id : `pub-${slug(seed.publisherName)}`,
+  listedAt: daysAgo(LISTED_DAYS_AGO[i]),
+  views: VIEWS[i],
+  paused: false,
 }));
 
+/**
+ * Static export can only serve pre-rendered routes, so new listings created in the demo
+ * are assigned one of these reserved ids, each of which has a pre-rendered detail page.
+ */
+export const NEW_LISTING_SLOTS = Array.from({ length: 30 }, (_, i) => `new-${String(i + 1).padStart(2, "0")}`);
+
+const eur = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
+const eurCents = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" });
+
+export const formatEUR = (amount: number, cents = false) => (cents ? eurCents : eur).format(amount);
+
+export const PERIOD_LABEL: Record<PricePeriod, string> = { month: "/ month", day: "/ day", total: "" };
+
+/** Price with its period, e.g. "1.850 € / month". */
 export function formatPrice(p: Pick<Property, "price" | "pricePeriod">): string {
-  const amount = new Intl.NumberFormat("de-DE", {
-    style: "currency",
-    currency: "EUR",
-    maximumFractionDigits: 0,
-  }).format(p.price);
-  return p.pricePeriod === "month" ? `${amount} / month` : p.pricePeriod === "day" ? `${amount} / day` : amount;
+  return `${formatEUR(p.price)} ${PERIOD_LABEL[p.pricePeriod]}`.trim();
+}
+
+export function formatDate(iso: string, opts: Intl.DateTimeFormatOptions = { day: "numeric", month: "short", year: "numeric" }) {
+  return new Intl.DateTimeFormat("en-GB", { ...opts, timeZone: "Europe/Berlin" }).format(new Date(iso));
+}
+
+export function bedroomsLabel(p: Pick<Property, "bedrooms" | "type">): string | null {
+  if (COMMERCIAL_TYPES.includes(p.type)) return null;
+  if (p.bedrooms === 0) return "Studio";
+  return `${p.bedrooms} ${p.bedrooms === 1 ? "bed" : "beds"}`;
+}
+
+const TRANSFER_TAX: Record<City, number> = {
+  Berlin: 6,
+  Munich: 3.5,
+  Hamburg: 5.5,
+  Frankfurt: 6,
+  Cologne: 6.5,
+  Stuttgart: 5,
+};
+
+/** Lease or purchase terms shown on the detail page, derived from the listing. */
+export function termsFor(p: Property): { label: string; value: string }[] {
+  if (p.intent === "Buy") {
+    return [
+      { label: "Buyer commission", value: p.publisherType === "Agent" ? "3.57% incl. VAT" : "None, direct sale" },
+      { label: `Property transfer tax (${p.state})`, value: `${TRANSFER_TAX[p.city]}%` },
+      { label: "Handover", value: `From ${formatDate(p.availableFrom)}` },
+      { label: "Energy certificate", value: "Available on request" },
+    ];
+  }
+  if (p.pricePeriod === "day") {
+    return [
+      { label: "Minimum booking", value: "1 day" },
+      { label: "Security deposit", value: formatEUR(500) },
+      { label: "Cleaning", value: "Included" },
+      { label: "Earliest date", value: formatDate(p.availableFrom) },
+    ];
+  }
+  const commercial = categoryOf(p.type) === "Commercial";
+  const months = p.intent === "Share" ? 2 : 3;
+  return [
+    { label: "Deposit", value: `${formatEUR(p.price * months)} (${months} months)` },
+    { label: "Minimum term", value: commercial ? "3 years" : p.intent === "Share" ? "6 months" : "12 months" },
+    { label: "Utilities", value: p.intent === "Share" ? "Included in rent" : "Approx. 15% of rent, billed monthly" },
+    { label: "Available from", value: formatDate(p.availableFrom) },
+  ];
 }

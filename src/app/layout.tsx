@@ -1,30 +1,44 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Bricolage_Grotesque, Figtree } from "next/font/google";
 import "./globals.css";
 import { AppProvider } from "@/context/AppContext";
+import { ToastProvider } from "@/components/ui/Toast";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import RoleSwitcher from "@/components/layout/RoleSwitcher";
 
-const inter = Inter({
-  variable: "--font-inter",
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
+});
+
+const figtree = Figtree({
+  variable: "--font-figtree",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "UFT Living Germany | Rent, Buy & Share Properties",
-  description: "Rent, buy and share verified properties across Berlin, Munich, Hamburg, Frankfurt, Cologne and Stuttgart.",
+  metadataBase: new URL("https://ulivger.com"),
+  title: {
+    default: "UFT Living Germany | Rent, buy and share verified properties",
+    template: "%s | UFT Living Germany",
+  },
+  description:
+    "Rent, buy and share verified homes, rooms and commercial spaces across Berlin, Munich, Hamburg, Frankfurt, Cologne and Stuttgart.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html lang="en" className={`${bricolage.variable} ${figtree.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-white text-navy">
         <AppProvider>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <RoleSwitcher />
+          <ToastProvider>
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <RoleSwitcher />
+          </ToastProvider>
         </AppProvider>
       </body>
     </html>
