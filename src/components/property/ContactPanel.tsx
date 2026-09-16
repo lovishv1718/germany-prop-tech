@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { CalendarClock, Flag, Heart, LockKeyhole, Mail, MessageSquare, Phone, Share2, ShieldCheck, UserRound } from "lucide-react";
 import { useApp, useUnlock } from "@/context/AppContext";
-import { DEMO_TENANT, formatDate, formatEUR, PERIOD_LABEL, type Property } from "@/data/properties";
+import { DEMO_TENANT, formatDate, formatEUR, PERIOD_LABEL, publisherShortName, type Property } from "@/data/properties";
 import { REPORT_REASONS, type PaymentMethod } from "@/data/demo";
 import { useToast } from "@/components/ui/Toast";
 import { VerifiedBadge } from "@/components/ui/Badge";
@@ -25,10 +25,7 @@ const initials = (name: string) =>
 function EnquiryModal({ property, open, onClose }: { property: Property; open: boolean; onClose: () => void }) {
   const { addEnquiry } = useApp();
   const toast = useToast();
-  // People are addressed by first name; agencies and partners by their company name.
-  const greeting = ["Landlord", "Flatmate", "Referral"].includes(property.publisherType)
-    ? property.publisherName.split(" ")[0]
-    : property.publisherName;
+  const greeting = publisherShortName(property);
   const [form, setForm] = useState({
     name: DEMO_TENANT.name,
     email: DEMO_TENANT.email,

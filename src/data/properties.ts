@@ -602,6 +602,11 @@ export function formatDate(iso: string, opts: Intl.DateTimeFormatOptions = { day
   return new Intl.DateTimeFormat("en-GB", { ...opts, timeZone: "Europe/Berlin" }).format(new Date(iso));
 }
 
+/** People are addressed by first name; agencies and partners by their company name. */
+export function publisherShortName(p: Pick<Property, "publisherName" | "publisherType">): string {
+  return ["Landlord", "Flatmate", "Referral"].includes(p.publisherType) ? p.publisherName.split(" ")[0] : p.publisherName;
+}
+
 export function bedroomsLabel(p: Pick<Property, "bedrooms" | "type">): string | null {
   if (COMMERCIAL_TYPES.includes(p.type) || p.type === "Studio") return null;
   if (p.bedrooms === 0) return "Studio layout";
