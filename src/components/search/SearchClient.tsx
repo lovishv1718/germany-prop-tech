@@ -21,6 +21,7 @@ import PropertyCard from "@/components/property/PropertyCard";
 import { PropertyMap } from "@/components/map";
 import { Checkbox, Label, Select } from "@/components/ui/Field";
 import { Button } from "@/components/ui/Button";
+import { Highlight, ScriptNote } from "@/components/ui/Scribble";
 
 const INTENT_LABEL: Record<Intent, string> = { Rent: "To rent", Buy: "To buy", Share: "To share" };
 
@@ -54,14 +55,17 @@ export default function SearchClient() {
     filters.verified && { label: "Verified only", clear: { verified: false } },
   ].filter(Boolean) as { label: string; clear: Partial<SearchFilters> }[];
 
-  const heading = [filters.type ?? (filters.category ? `${filters.category} properties` : "Properties"), filters.intent ? INTENT_LABEL[filters.intent].toLowerCase() : null, `in ${filters.city ?? "Germany"}`]
+  const headingLead = [filters.type ?? (filters.category ? `${filters.category} properties` : "Properties"), filters.intent ? INTENT_LABEL[filters.intent].toLowerCase() : null, "in"]
     .filter(Boolean)
     .join(" ");
 
   return (
     <div className="mx-auto max-w-7xl px-4 pb-20 pt-8 sm:px-6 sm:pt-10 lg:px-8">
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold text-navy sm:text-[40px] sm:leading-tight">{heading}</h1>
+        <ScriptNote className="mb-1 -rotate-2 text-2xl text-steel">Verified homes. Safer stays.</ScriptNote>
+        <h1 className="text-[34px] font-extrabold leading-[1.05] tracking-[-0.035em] text-navy sm:text-5xl">
+          {headingLead} <Highlight>{filters.city ?? "Germany"}</Highlight>
+        </h1>
         <p className="text-slate-600" aria-live="polite">
           <span className="font-semibold text-navy">{results.length}</span> {results.length === 1 ? "property" : "properties"} match your search
         </p>
@@ -87,7 +91,7 @@ export default function SearchClient() {
 
           <div
             id="search-filters"
-            className={`${filtersOpen ? "mt-3 block" : "hidden"} space-y-5 rounded-card border border-line bg-white p-5 lg:sticky lg:top-24 lg:mt-0 lg:block`}
+            className={`${filtersOpen ? "mt-3 block" : "hidden"} space-y-5 rounded-[16px] border border-line/80 bg-white p-5 shadow-card lg:sticky lg:top-24 lg:mt-0 lg:block`}
           >
             <div className="flex items-center justify-between">
               <p className="font-display text-lg font-bold text-navy">Filters</p>

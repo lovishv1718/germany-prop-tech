@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { ArrowRight, Building2, Code, FileSpreadsheet, HardHat, Link2, Plane, UsersRound } from "lucide-react";
 import PartnerForm from "@/components/pages/PartnerForm";
 import { ButtonLink } from "@/components/ui/Button";
+import PageIntro from "@/components/ui/PageIntro";
+import { Highlight } from "@/components/ui/Scribble";
 
 export const metadata: Metadata = {
   title: "Partner with us",
@@ -45,10 +47,12 @@ export default function PartnerPage() {
       <section className="border-b border-line">
         <div className="mx-auto max-w-7xl px-4 pb-16 pt-12 sm:px-6 sm:pt-16 lg:px-8">
           <div className="max-w-3xl">
-            <h1 className="text-4xl font-extrabold leading-[1.05] text-navy sm:text-6xl">Grow with Germany&apos;s verified property marketplace</h1>
-            <p className="mt-5 text-lg text-slate-600 sm:text-xl">
-              Connect your listings once and reach tenants, buyers and flatmates in six cities. Every enquiry comes from a signed-in, contactable person.
-            </p>
+            <PageIntro
+              note="For agencies and partners"
+              lead="Grow with Germany's verified property"
+              highlight="marketplace"
+              description="Connect your listings once and reach tenants, buyers and flatmates in six cities. Every enquiry comes from a signed-in, contactable person."
+            />
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <ButtonLink href="#apply" variant="primary" size="lg">
                 Apply to partner <ArrowRight className="h-4 w-4" />
@@ -58,7 +62,7 @@ export default function PartnerPage() {
               </ButtonLink>
             </div>
           </div>
-          <ul className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-card border border-line bg-line lg:grid-cols-4">
+          <ul className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-card border border-line/80 bg-line shadow-card lg:grid-cols-4">
             {STATS.map((s) => (
               <li key={s.label} className="bg-white px-5 py-6">
                 <p className="font-display text-4xl font-bold tracking-tight text-navy">{s.value}</p>
@@ -70,10 +74,10 @@ export default function PartnerPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <h2 className="max-w-2xl text-3xl font-bold text-navy sm:text-4xl">Built for every kind of property business</h2>
+        <h2 className="max-w-2xl text-[34px] font-extrabold leading-[1.05] tracking-[-0.03em] text-navy sm:text-5xl">Built for every kind of property <Highlight>business</Highlight></h2>
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {PARTNER_TYPES.map(({ icon: Icon, title, text }) => (
-            <div key={title} className="rounded-card border border-line p-6">
+            <div key={title} className="rounded-card border border-line/80 bg-white p-6 shadow-card">
               <Icon className="h-7 w-7 text-navy" strokeWidth={1.8} />
               <h3 className="mt-5 text-xl font-bold text-navy">{title}</h3>
               <p className="mt-2 text-[15px] leading-relaxed text-slate-600">{text}</p>
@@ -84,7 +88,7 @@ export default function PartnerPage() {
 
       <section id="integrations" className="scroll-mt-24 bg-sand">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <h2 className="max-w-2xl text-3xl font-bold text-navy sm:text-4xl">Three ways to connect</h2>
+          <h2 className="max-w-2xl text-[34px] font-extrabold leading-[1.05] tracking-[-0.03em] text-navy sm:text-5xl">Three ways to <Highlight>connect</Highlight></h2>
           <p className="mt-3 max-w-2xl text-lg text-slate-600">Start with a CSV today and move to the API when you are ready. All methods support the same listing fields.</p>
 
           <div className="mt-10 grid gap-5 lg:grid-cols-[1.3fr_1fr]">
@@ -132,7 +136,7 @@ export default function PartnerPage() {
       <section id="apply" className="scroll-mt-24">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_1.4fr] lg:px-8">
           <div>
-            <h2 className="text-3xl font-bold text-navy sm:text-4xl">Apply to become a partner</h2>
+            <h2 className="text-[34px] font-extrabold leading-[1.05] tracking-[-0.03em] text-navy sm:text-5xl">Apply to become a <Highlight>partner</Highlight></h2>
             <p className="mt-3 text-lg text-slate-600">Tell us a little about your business. We reply within 2 working days.</p>
             <ol className="mt-8 space-y-5">
               {[

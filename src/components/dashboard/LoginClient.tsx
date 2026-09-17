@@ -1,11 +1,12 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowRight, KeyRound, Shield, UserRound } from "lucide-react";
 import { dashboardPath, useApp, type Role } from "@/context/AppContext";
 import { DEMO_PUBLISHER, DEMO_TENANT } from "@/data/properties";
 import { useToast } from "@/components/ui/Toast";
 import { ButtonLink } from "@/components/ui/Button";
+import PageIntro from "@/components/ui/PageIntro";
 
 const ACCOUNTS: { role: Exclude<Role, "Guest">; icon: typeof UserRound; name: string; email: string; points: string[] }[] = [
   {
@@ -35,15 +36,27 @@ export default function LoginClient() {
   const { role, setRole } = useApp();
   const router = useRouter();
   const toast = useToast();
+  const signup = useSearchParams().get("mode") === "signup";
 
   return (
     <section className="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
-      <div className="max-w-2xl">
-        <h1 className="text-4xl font-bold text-navy sm:text-5xl">Welcome back</h1>
-        <p className="mt-4 text-lg text-slate-600">
-          This prototype has three demo accounts. Pick one to sign in and open its dashboard. No password needed.
-        </p>
-      </div>
+      {signup ? (
+        <PageIntro
+          size="md"
+          note="Join in under a minute"
+          lead="Create your"
+          highlight="account"
+          description="In this prototype, sign-up is simulated. Pick the kind of account you want and we will open its dashboard."
+        />
+      ) : (
+        <PageIntro
+          size="md"
+          note="Good to see you"
+          lead="Welcome"
+          highlight="back"
+          description="This prototype has three demo accounts. Pick one to sign in and open its dashboard. No password needed."
+        />
+      )}
 
       <div className="mt-10 grid gap-4 md:grid-cols-3">
         {ACCOUNTS.map(({ role: r, icon: Icon, name, email, points }) => (
@@ -52,13 +65,13 @@ export default function LoginClient() {
             type="button"
             onClick={() => {
               setRole(r);
-              toast(`Signed in as demo ${r.toLowerCase()}`);
+              toast(signup ? `Account created. Welcome to your ${r.toLowerCase()} dashboard.` : `Signed in as demo ${r.toLowerCase()}`);
               router.push(dashboardPath(r));
             }}
-            className={`group flex flex-col rounded-card border bg-white p-6 text-left transition hover:border-navy hover:shadow-lift ${role === r ? "border-navy" : "border-line"}`}
+            className={`group flex flex-col rounded-[18px] border bg-white p-6 text-left shadow-card transition hover:-translate-y-1 hover:border-navy hover:shadow-float ${role === r ? "border-navy" : "border-line/80"}`}
           >
             <div className="flex items-center justify-between">
-              <span className="grid h-11 w-11 place-items-center rounded-btn bg-navy text-sun">
+              <span className="grid h-12 w-12 place-items-center rounded-full bg-navy text-sun">
                 <Icon className="h-5 w-5" />
               </span>
               {role === r && <span className="rounded-md bg-sand px-2 py-0.5 text-xs font-semibold text-navy">Signed in</span>}
@@ -73,7 +86,7 @@ export default function LoginClient() {
               ))}
             </ul>
             <span className="mt-6 inline-flex items-center gap-1.5 font-semibold text-navy">
-              Continue as {r.toLowerCase()}
+              {signup ? "Sign up" : "Continue"} as {r.toLowerCase()}
               <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
             </span>
           </button>

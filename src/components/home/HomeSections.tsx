@@ -16,24 +16,42 @@ import {
 import PropertyCard from "@/components/property/PropertyCard";
 import Photo from "@/components/ui/Photo";
 import { ButtonLink } from "@/components/ui/Button";
+import { Highlight, ScriptNote } from "@/components/ui/Scribble";
 
 export function SectionHeading({
   title,
+  note,
   description,
   action,
+  light = false,
 }: {
-  title: string;
+  /** A plain title, or [lead, highlighted word] to draw the brush underline under the last word. */
+  title: string | [string, string];
+  note?: string;
   description?: string;
   action?: { href: string; label: string };
+  light?: boolean;
 }) {
   return (
-    <div className="mb-8 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
+    <div className="mb-10 flex flex-col gap-4 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
       <div className="max-w-2xl">
-        <h2 className="text-3xl font-bold text-navy sm:text-4xl">{title}</h2>
-        {description && <p className="mt-3 text-lg text-slate-600">{description}</p>}
+        {note && <ScriptNote className={`mb-1 -rotate-2 text-2xl ${light ? "text-sun" : "text-steel"}`}>{note}</ScriptNote>}
+        <h2 className={`text-[34px] font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-5xl ${light ? "text-white" : "text-navy"}`}>
+          {typeof title === "string" ? (
+            title
+          ) : (
+            <>
+              {title[0]} <Highlight>{title[1]}</Highlight>
+            </>
+          )}
+        </h2>
+        {description && <p className={`mt-4 text-lg ${light ? "text-white/70" : "text-slate-600"}`}>{description}</p>}
       </div>
       {action && (
-        <Link href={action.href} className="group inline-flex shrink-0 items-center gap-1.5 font-semibold text-navy">
+        <Link
+          href={action.href}
+          className="group inline-flex h-11 shrink-0 items-center gap-2 self-start rounded-btn border border-line bg-white px-4 font-semibold text-navy transition hover:shadow-card sm:self-auto"
+        >
           {action.label}
           <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
         </Link>
@@ -55,11 +73,12 @@ export function VerifiedThisWeek() {
   );
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <section className="mx-auto max-w-7xl px-4 pb-20 pt-16 sm:px-6 lg:px-8 lg:pb-24 lg:pt-20">
       <SectionHeading
-        title="Verified this week"
-        description="Fresh listings from publishers whose identity and ownership we have checked."
-        action={{ href: "/search?verified=1", label: "See all verified listings" }}
+        title={["Verified", "this week"]}
+        note="Fresh and checked"
+        description="New listings from publishers whose identity and ownership we have checked."
+        action={{ href: "/search?verified=1", label: "See all verified" }}
       />
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {latest.map((p) => (
@@ -79,12 +98,13 @@ export function PropertyTypeGrid() {
   }, [published]);
 
   return (
-    <section className="bg-sand">
-      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <section className="bg-white">
+      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
         <SectionHeading
-          title="Every kind of space"
+          title={["Every kind of", "space"]}
+          note="Homes to offices"
           description="From a room in a Berlin flat share to an office floor in Frankfurt."
-          action={{ href: "/property-types", label: "Browse property types" }}
+          action={{ href: "/property-types", label: "Browse all types" }}
         />
         <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
           {PROPERTY_TYPES.map((type) => {
@@ -93,12 +113,12 @@ export function PropertyTypeGrid() {
               <Link
                 key={type}
                 href={`/search?type=${encodeURIComponent(type)}`}
-                className="group overflow-hidden rounded-card bg-white transition hover:shadow-lift"
+                className="group overflow-hidden rounded-card border border-line bg-white p-2 transition hover:-translate-y-0.5 hover:shadow-card"
               >
-                <div className="aspect-[3/2] overflow-hidden">
+                <div className="aspect-[3/2] overflow-hidden rounded-[10px]">
                   <Photo src={TYPE_IMAGES[type]} alt="" className="h-full w-full transition duration-500 group-hover:scale-105" />
                 </div>
-                <div className="flex items-center justify-between gap-2 px-3.5 py-3 sm:px-4">
+                <div className="flex items-center justify-between gap-2 px-2 pb-1.5 pt-3">
                   <div className="min-w-0">
                     <p className="truncate font-semibold text-navy">{type}</p>
                     <p className="text-sm text-slate-500">
@@ -115,9 +135,12 @@ export function PropertyTypeGrid() {
             href="/search"
             className="flex flex-col justify-between rounded-card bg-navy p-5 text-white transition hover:bg-navy-800"
           >
-            <p className="font-display text-2xl font-bold leading-tight">
-              All <LiveListingCount /> live listings
-            </p>
+            <div>
+              <ScriptNote className="text-xl text-sun">Not sure yet?</ScriptNote>
+              <p className="mt-1 font-display text-2xl font-bold leading-tight">
+                All <LiveListingCount /> live listings
+              </p>
+            </div>
             <span className="mt-6 inline-flex items-center gap-1.5 font-semibold text-sun">
               Open search <ArrowRight className="h-4 w-4" />
             </span>
@@ -132,8 +155,13 @@ export function PopularCities() {
   const published = usePublishedListings();
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-      <SectionHeading title="Popular cities" description="Live listing counts across Germany's six biggest rental markets." />
+    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+      <SectionHeading
+        title={["Popular", "cities"]}
+        note="Where people are moving"
+        description="Live listing counts across Germany's six biggest rental markets."
+        action={{ href: "/search?view=map", label: "Explore the map" }}
+      />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {CITIES.map((city, i) => {
           const count = published.filter((p) => p.city === city).length;
@@ -141,14 +169,18 @@ export function PopularCities() {
             <Link
               key={city}
               href={`/search?city=${city}`}
-              className={`group relative block overflow-hidden rounded-card bg-navy ${i === 0 ? "sm:col-span-2 lg:col-span-1 lg:row-span-2" : ""}`}
+              className={`group relative block overflow-hidden rounded-[18px] bg-navy shadow-card ${
+                i === 0 ? "sm:col-span-2 lg:col-span-1 lg:row-span-2" : i === CITIES.length - 1 ? "sm:col-span-2 lg:col-span-3" : ""
+              }`}
             >
               <Photo
                 src={CITY_IMAGES[city]}
                 alt={city}
-                className={`w-full transition duration-700 group-hover:scale-105 ${i === 0 ? "aspect-[16/10] lg:h-full lg:aspect-auto" : "aspect-[16/10]"}`}
+                className={`w-full transition duration-700 group-hover:scale-105 ${
+                  i === 0 ? "aspect-[16/10] lg:h-full lg:aspect-auto" : i === CITIES.length - 1 ? "aspect-[16/10] sm:aspect-[21/9] lg:aspect-[16/5]" : "aspect-[16/10]"
+                }`}
               />
-              <div className="absolute inset-x-3 bottom-3 flex items-center justify-between gap-3 rounded-[10px] bg-white px-4 py-3">
+              <div className="absolute inset-x-3 bottom-3 flex items-center justify-between gap-3 rounded-card bg-white/95 px-4 py-3 shadow-float backdrop-blur">
                 <div>
                   <p className="font-display text-lg font-bold leading-tight text-navy">{city}</p>
                   <p className="text-sm text-slate-500">{CITY_STATE[city]}</p>
@@ -177,15 +209,18 @@ export function AlertsCta() {
   ];
 
   return (
-    <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
-      <div className="grid gap-10 overflow-hidden rounded-card bg-navy px-6 py-10 text-white sm:px-10 sm:py-14 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-16">
+    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+      <div className="grid gap-10 overflow-hidden rounded-[22px] bg-navy px-6 py-10 text-white shadow-float sm:px-10 sm:py-14 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-16">
         <div>
-          <span className="inline-flex items-center gap-2 rounded-md bg-white/10 px-2.5 py-1 text-sm font-medium text-white/90">
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-sm font-medium text-white/90">
             <MessageCircle className="h-4 w-4 text-sun" /> WhatsApp alerts
           </span>
-          <h2 className="mt-5 text-3xl font-bold sm:text-[42px] sm:leading-[1.1]">Be the first to hear about new places.</h2>
+          <h2 className="mt-5 text-[34px] font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-5xl">
+            Be the <Highlight>first</Highlight> to hear about new places.
+          </h2>
+          <ScriptNote className="mt-3 -rotate-2 text-2xl text-sun">Good flats go in hours</ScriptNote>
           <p className="mt-4 max-w-lg text-lg text-white/70">
-            Good flats in Munich go in hours. Get matching listings on WhatsApp the moment they are approved.
+            Get matching listings on WhatsApp the moment they are approved, before the viewings fill up.
           </p>
           <ul className="mt-6 space-y-2.5 text-white/85">
             {["Alerts by city, type and budget", "Instant delivery, usually under 60 seconds", "Pause or cancel from WhatsApp"].map((item) => (
@@ -208,8 +243,8 @@ export function AlertsCta() {
               <p className={`mt-1 text-sm ${plan.highlight ? "text-slate-500" : "text-white/60"}`}>{plan.note}</p>
               <ButtonLink
                 href={`/subscriptions?plan=${plan.id}`}
-                variant={plan.highlight ? "primary" : "outline"}
-                className={`mt-6 ${plan.highlight ? "" : "border-white/25 bg-transparent text-white hover:bg-white/10"}`}
+                variant={plan.highlight ? "primary" : "ghost"}
+                className={`mt-6 ${plan.highlight ? "" : "border border-white/30 text-white hover:bg-white/10"}`}
               >
                 Choose {plan.name.toLowerCase()}
               </ButtonLink>

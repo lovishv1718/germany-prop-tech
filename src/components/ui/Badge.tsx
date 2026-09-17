@@ -1,7 +1,7 @@
 import { BadgeCheck } from "lucide-react";
 import type { Intent, ListingStatus } from "@/data/properties";
 
-const base = "inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-semibold whitespace-nowrap";
+const base = "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold whitespace-nowrap";
 
 const INTENT_STYLES: Record<Intent, string> = {
   Rent: "bg-sun text-navy",

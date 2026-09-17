@@ -1,5 +1,5 @@
 import type { ComponentProps } from "react";
-import { Check, ChevronDown } from "lucide-react";
+import { Check, ChevronDown, type LucideIcon } from "lucide-react";
 
 const control =
   "w-full rounded-btn border border-line bg-white px-3.5 text-[15px] text-navy placeholder:text-slate-400 transition-colors hover:border-slate-300 focus:border-navy focus:outline-none focus:ring-2 focus:ring-sun/40 disabled:bg-sand";
@@ -25,10 +25,11 @@ export function Textarea({ className = "", ...props }: ComponentProps<"textarea"
   return <textarea className={`${control} min-h-28 py-2.5 leading-relaxed ${className}`} {...props} />;
 }
 
-export function Select({ className = "", children, ...props }: ComponentProps<"select">) {
+export function Select({ className = "", children, icon: Icon, ...props }: ComponentProps<"select"> & { icon?: LucideIcon }) {
   return (
     <div className={`relative ${className}`}>
-      <select className={`${control} h-11 cursor-pointer appearance-none pr-9`} {...props}>
+      {Icon && <Icon className="pointer-events-none absolute left-3.5 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-slate-500" />}
+      <select className={`${control} h-11 cursor-pointer appearance-none pr-9 ${Icon ? "pl-10" : ""}`} {...props}>
         {children}
       </select>
       <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />

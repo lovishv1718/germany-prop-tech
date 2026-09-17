@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import LoginClient from "@/components/dashboard/LoginClient";
 
 export const metadata: Metadata = {
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function LoginPage() {
-  return <LoginClient />;
+  return (
+    <Suspense fallback={<div className="mx-auto h-[70vh] max-w-5xl" />}>
+      <LoginClient />
+    </Suspense>
+  );
 }

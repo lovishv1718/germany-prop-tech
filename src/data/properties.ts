@@ -245,7 +245,12 @@ export const CITY_IMAGES: Record<City, string> = {
   Stuttgart: img("1621978766642-2d64b83eed24", 800),
 };
 
-export const HERO_IMAGE = img("1502672260266-1c1ef2d93688", 1600);
+export const HERO_IMAGE = img("1649429710616-dad56ce9a076", 1600);
+export const HERO_BACK_IMAGE = img("1759743918954-f373b0d8a891", 900);
+
+const portrait = (id: string) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&crop=faces&w=160&h=160&q=80`;
+export const TESTIMONIAL_AVATAR = portrait("1580489944761-15a19d654956");
+export const RATING_AVATARS = ["1594756154841-ac5d160dbf46", "1507003211169-0a1dd7228f2d", "1500648767791-00dcc994a43e"].map(portrait);
 
 /** Picks 4 images for a listing, rotating through the pool so neighbours don't look identical. */
 export function imagesFor(type: PropertyType, seed: number): string[] {

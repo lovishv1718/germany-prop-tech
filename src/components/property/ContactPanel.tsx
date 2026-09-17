@@ -160,7 +160,7 @@ export default function ContactPanel({ property }: { property: Property }) {
   };
 
   return (
-    <div className="rounded-card border border-line bg-white p-5 shadow-soft sm:p-6">
+    <div className="rounded-[18px] border border-line/80 bg-white p-5 shadow-float sm:p-6">
       <p className="font-display text-3xl font-bold tracking-tight text-navy">
         {formatEUR(property.price)}
         {PERIOD_LABEL[property.pricePeriod] && <span className="ml-1.5 font-sans text-base font-medium tracking-normal text-slate-500">{PERIOD_LABEL[property.pricePeriod]}</span>}

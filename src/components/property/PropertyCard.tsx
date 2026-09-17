@@ -34,19 +34,19 @@ export default function PropertyCard({ property: p, eager = false }: { property:
   const beds = bedroomsLabel(p);
 
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-card border border-line bg-white transition hover:shadow-lift">
-      <div className="relative aspect-[4/3] overflow-hidden bg-sand">
+    <article className="group relative flex flex-col rounded-[16px] border border-line/80 bg-white p-2 shadow-card transition duration-300 hover:-translate-y-1 hover:shadow-float">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-[12px] bg-sand">
         <Photo
           src={p.images[0]}
           alt={p.title}
           eager={eager}
           className="h-full w-full transition duration-500 group-hover:scale-[1.03]"
         />
-        <IntentBadge intent={p.intent} className="absolute left-3 top-3 shadow-sm" />
+        <IntentBadge intent={p.intent} className="absolute left-3 top-3 shadow-card" />
         <SaveButton propertyId={p.id} className="absolute right-3 top-3 z-10" />
       </div>
 
-      <div className="flex flex-1 flex-col p-4 sm:p-5">
+      <div className="flex flex-1 flex-col px-3 pb-3 pt-4">
         <p className="font-display text-[22px] font-bold leading-none tracking-tight text-navy">
           {formatEUR(p.price)}
           {PERIOD_LABEL[p.pricePeriod] && (

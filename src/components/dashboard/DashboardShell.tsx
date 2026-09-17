@@ -7,6 +7,7 @@ import { useApp, type Role } from "@/context/AppContext";
 import { DEMO_PUBLISHER, DEMO_TENANT } from "@/data/properties";
 import { useHydrated } from "@/lib/useHydrated";
 import { Button } from "@/components/ui/Button";
+import { ScriptNote } from "@/components/ui/Scribble";
 
 export interface DashNavItem {
   key: string;
@@ -32,7 +33,7 @@ function RoleGate({ role, children }: { role: Exclude<Role, "Guest">; children: 
   const { icon: Icon, description } = ROLE_PROFILE[role];
   return (
     <div className="mx-auto max-w-lg px-4 py-20 sm:py-28">
-      <div className="rounded-card border border-line bg-white p-8 text-center shadow-soft">
+      <div className="rounded-[18px] border border-line/80 bg-white p-8 text-center shadow-float">
         <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-navy text-sun">
           <Icon className="h-6 w-6" />
         </span>
@@ -114,7 +115,8 @@ export default function DashboardShell({ role, nav, active, onSelect, title, sub
         <div className="min-w-0">
           <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-navy sm:text-4xl">{title}</h1>
+              <ScriptNote className="mb-1 -rotate-2 text-xl text-steel">{profile.detail}</ScriptNote>
+              <h1 className="text-3xl font-extrabold tracking-[-0.03em] text-navy sm:text-[42px] sm:leading-[1.1]">{title}</h1>
               {subtitle && <p className="mt-2 text-slate-600">{subtitle}</p>}
             </div>
             {actions && <div className="flex shrink-0 gap-2">{actions}</div>}
@@ -128,7 +130,7 @@ export default function DashboardShell({ role, nav, active, onSelect, title, sub
 
 export function StatCard({ label, value, detail, icon: Icon }: { label: string; value: React.ReactNode; detail?: React.ReactNode; icon: LucideIcon }) {
   return (
-    <div className="rounded-card border border-line bg-white p-5">
+    <div className="rounded-card border border-line/80 bg-white p-5 shadow-card">
       <div className="flex items-center justify-between gap-3">
         <p className="text-sm font-medium text-slate-500">{label}</p>
         <Icon className="h-[18px] w-[18px] text-slate-400" />
@@ -141,7 +143,7 @@ export function StatCard({ label, value, detail, icon: Icon }: { label: string; 
 
 export function Panel({ title, action, children, className = "" }: { title: string; action?: React.ReactNode; children: React.ReactNode; className?: string }) {
   return (
-    <section className={`rounded-card border border-line bg-white ${className}`}>
+    <section className={`rounded-card border border-line/80 bg-white shadow-card ${className}`}>
       <div className="flex items-center justify-between gap-3 border-b border-line px-5 py-4">
         <h2 className="font-display text-lg font-bold text-navy">{title}</h2>
         {action}

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Logo, NAV_LINKS } from "./nav";
+import { ScriptNote } from "@/components/ui/Scribble";
 import { CITIES } from "@/data/properties";
 
 export default function Footer() {
@@ -13,6 +14,7 @@ export default function Footer() {
             Rent, buy and share verified homes and commercial spaces across Germany. Every publisher is checked
             before a listing goes live.
           </p>
+          <ScriptNote className="-rotate-2 text-2xl text-sun">More than just a place. A new chapter.</ScriptNote>
         </div>
 
         <div>
