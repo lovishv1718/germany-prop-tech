@@ -1,31 +1,22 @@
 import type { Metadata } from "next";
-import { LayoutGrid } from "lucide-react";
-import ComingSoon from "@/components/ComingSoon";
-import { PROPERTY_TYPES } from "@/data/properties";
+import PropertyTypesClient from "@/components/pages/PropertyTypesClient";
 
-export const metadata: Metadata = { title: "Property Types | UFT Living Germany" };
+export const metadata: Metadata = {
+  title: "Property types",
+  description:
+    "Browse residential and commercial property types in Germany: studios, BHK apartments, houses, room and flat shares, offices, stores and event halls.",
+};
 
 export default function PropertyTypesPage() {
   return (
-    <ComingSoon
-      icon={LayoutGrid}
-      eyebrow="Property Types"
-      title="Every kind of space, in one place"
-      description="From studios and flat shares to office floors and event halls."
-      planned={[
-        "A visual card for each property type",
-        "Live listing counts per type",
-        "Jump straight to filtered search results",
-        "Guides for tenants, buyers and flatmates",
-      ]}
-    >
-      <div className="flex flex-wrap gap-2">
-        {PROPERTY_TYPES.map((type) => (
-          <span key={type} className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-navy shadow-soft">
-            {type}
-          </span>
-        ))}
+    <div className="mx-auto max-w-7xl px-4 pb-24 pt-12 sm:px-6 sm:pt-16 lg:px-8">
+      <div className="mb-14 max-w-3xl">
+        <h1 className="text-4xl font-bold text-navy sm:text-6xl">Find the right kind of space</h1>
+        <p className="mt-5 text-lg text-slate-600 sm:text-xl">
+          Eleven property types across residential and commercial, each checked by our team before it goes live.
+        </p>
       </div>
-    </ComingSoon>
+      <PropertyTypesClient />
+    </div>
   );
 }
