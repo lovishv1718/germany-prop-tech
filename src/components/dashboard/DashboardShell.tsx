@@ -66,7 +66,7 @@ export default function DashboardShell({ role, nav, active, onSelect, title, sub
   const profile = ROLE_PROFILE[role];
 
   const itemClass = (key: string) =>
-    `flex shrink-0 items-center gap-2.5 rounded-btn px-3 py-2.5 text-[15px] font-medium transition-colors whitespace-nowrap ${
+    `flex shrink-0 items-center gap-2.5 rounded-btn px-3 py-2.5 text-left text-[15px] font-medium transition-colors whitespace-nowrap ${
       active === key ? "bg-navy text-white" : "text-slate-600 hover:bg-sand hover:text-navy"
     }`;
 

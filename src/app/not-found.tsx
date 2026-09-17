@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import { ArrowLeft, Search } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
+
+export const metadata: Metadata = {
+  title: "Page not found",
+  description: "The page you are looking for does not exist on UFT Living Germany.",
+};
 
 export default function NotFound() {
   return (

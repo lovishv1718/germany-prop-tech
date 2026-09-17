@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { BedDouble, CalendarDays, Check, ChevronRight, Eye, Info, LayoutGrid, MapPin, Ruler, SearchX, Sofa } from "lucide-react";
 import { useApp, usePublishedListings } from "@/context/AppContext";
 import { DEMO_PUBLISHER, bedroomsLabel, formatDate, termsFor, type Property } from "@/data/properties";
@@ -78,6 +78,11 @@ export default function PropertyDetail({ id }: { id: string }) {
   const { listings, role } = useApp();
   const hydrated = useHydrated();
   const property = listings.find((p) => p.id === id);
+
+  // Listings created in the demo are prerendered under a generic title, so name the tab on the client.
+  useEffect(() => {
+    if (property) document.title = `${property.title}, ${property.city} | UFT Living Germany`;
+  }, [property]);
 
   if (!property) return hydrated ? <NotAvailable /> : <DetailSkeleton />;
 
