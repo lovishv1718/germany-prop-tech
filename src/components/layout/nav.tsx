@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export const NAV_LINKS = [
@@ -8,22 +9,18 @@ export const NAV_LINKS = [
   { href: "/partner", label: "Partner With Us" },
 ];
 
-export function Logo({ light = false }: { light?: boolean }) {
+/** Brand logo. The light variant (navy ink swapped for white) is for dark backgrounds like the footer. */
+export function Logo({ light = false, className = "h-10" }: { light?: boolean; className?: string }) {
   return (
-    <Link href="/" className="group flex items-center gap-2.5" aria-label="UFT Living Germany home">
-      <span
-        className={`grid h-9 w-9 place-items-center rounded-[9px] font-display text-[15px] font-extrabold tracking-tight ${
-          light ? "bg-sun text-navy" : "bg-navy text-sun"
-        }`}
-      >
-        U
-      </span>
-      <span className={`font-display text-[17px] font-bold leading-none tracking-tight ${light ? "text-white" : "text-navy"}`}>
-        UFT Living
-        <span className={`block text-[12px] font-medium tracking-normal ${light ? "text-white/60" : "text-slate-500"}`}>
-          Germany
-        </span>
-      </span>
+    <Link href="/" className="flex shrink-0 items-center" aria-label="UFT Living Germany home">
+      <Image
+        src={light ? "/brand/logo-light.png" : "/brand/logo.png"}
+        alt="UFT Living Germany"
+        width={671}
+        height={160}
+        priority={!light}
+        className={`w-auto ${className}`}
+      />
     </Link>
   );
 }
