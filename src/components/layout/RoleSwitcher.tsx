@@ -33,7 +33,7 @@ export default function RoleSwitcher() {
   }, [open]);
 
   return (
-    <div ref={ref} className="fixed bottom-4 right-4 z-50 sm:bottom-6 sm:right-6">
+    <div ref={ref} className="fixed bottom-[76px] right-4 z-50 sm:bottom-20 sm:right-6">
       {open && (
         <div className="absolute bottom-14 right-0 w-[min(18rem,calc(100vw-2rem))] animate-pop-in rounded-card border border-line bg-white p-2 shadow-lift">
           <p className="px-3 pb-2 pt-1.5 text-xs font-medium text-slate-500">View the prototype as</p>

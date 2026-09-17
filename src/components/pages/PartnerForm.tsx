@@ -77,7 +77,7 @@ export default function PartnerForm() {
         </div>
         <div>
           <Label htmlFor="p-phone">Phone (optional)</Label>
-          <Input id="p-phone" type="tel" value={form.phone} onChange={(e) => update("phone", e.target.value)} placeholder="+49 30 1234 5678" />
+          <Input id="p-phone" type="tel" value={form.phone} onChange={(e) => update("phone", e.target.value)} placeholder="+49 000 000 000" />
         </div>
         <div>
           <Label htmlFor="p-type">Partner type</Label>

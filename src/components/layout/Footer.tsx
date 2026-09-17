@@ -53,11 +53,11 @@ export default function Footer() {
           <ul className="space-y-3 text-[15px]">
             <li className="flex items-start gap-2.5">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-sun" />
-              Friedrichstraße 68, 10117 Berlin
+              Berlin, Germany
             </li>
             <li className="flex items-center gap-2.5">
               <Phone className="h-4 w-4 shrink-0 text-sun" />
-              +49 30 1234 5678
+              +49 000 000 000
             </li>
             <li className="flex items-center gap-2.5">
               <Mail className="h-4 w-4 shrink-0 text-sun" />
@@ -68,7 +68,8 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 text-sm text-white/50 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+        {/* Bottom padding keeps the legal links clear of the floating role pill and hosting badges. */}
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 pb-40 pt-6 text-sm text-white/50 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:pb-36 lg:px-8">
           <p>© 2026 UFT Living Germany · ulivger.com</p>
           <p className="flex gap-5">
             <span>Impressum</span>

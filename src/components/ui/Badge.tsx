@@ -32,8 +32,8 @@ const STATUS_STYLES: Record<ListingStatus | "Paused", string> = {
   Paused: "bg-slate-100 text-slate-600",
 };
 
-export function StatusBadge({ status }: { status: ListingStatus | "Paused" }) {
-  return <span className={`${base} ${STATUS_STYLES[status]}`}>{status}</span>;
+export function StatusBadge({ status, label }: { status: ListingStatus | "Paused"; label?: string }) {
+  return <span className={`${base} ${STATUS_STYLES[status]}`}>{label ?? status}</span>;
 }
 
 export function Tag({ children, className = "" }: { children: React.ReactNode; className?: string }) {

@@ -53,7 +53,7 @@ export type NewListingInput = Omit<
 /* quota), in which case the in-memory copy remains the source of truth. */
 /* ------------------------------------------------------------------ */
 
-const STORAGE_KEY = "ulivger.demo.v2";
+const STORAGE_KEY = "ulivger.demo.v3";
 
 function initialState(): DemoState {
   return {

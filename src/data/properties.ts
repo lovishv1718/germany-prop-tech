@@ -183,14 +183,14 @@ export const DEMO_PUBLISHER = {
   id: "pub-katrin-hoffmann",
   name: "Katrin Hoffmann",
   type: "Landlord" as PublisherType,
-  phone: "+49 30 5501 2231",
+  phone: "+49 000 000 000",
   email: "k.hoffmann@example.com",
 };
 
 export const DEMO_TENANT = {
   name: "Lukas Meyer",
   email: "lukas.meyer@example.com",
-  phone: "+49 151 2345 6789",
+  phone: "+49 000 000 000",
 };
 
 const img = (id: string, w = 1200) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
@@ -286,7 +286,7 @@ const seeds: Seed[] = [
     amenities: ["Balcony", "Elevator", "Washing machine", "Fibre internet", "Bike storage"],
     availableFrom: "2026-10-01", lat: 52.5362, lng: 13.4178,
     publisherType: "Landlord", verified: true, status: "Published",
-    publisherName: "Katrin Hoffmann", publisherPhone: "+49 30 5501 2231", publisherEmail: "k.hoffmann@example.com",
+    publisherName: "Katrin Hoffmann", publisherPhone: "+49 000 000 000", publisherEmail: "k.hoffmann@example.com",
   },
   {
     title: "Furnished Studio in Kreuzberg",
@@ -297,7 +297,7 @@ const seeds: Seed[] = [
     amenities: ["Anmeldung possible", "Fibre internet", "Fitted kitchen"],
     availableFrom: "2026-09-20", lat: 52.4986, lng: 13.4034,
     publisherType: "Agent", verified: true, status: "Published",
-    publisherName: "Spree Homes GmbH", publisherPhone: "+49 30 4412 8890", publisherEmail: "lettings@example.com",
+    publisherName: "Spree Homes GmbH", publisherPhone: "+49 000 000 000", publisherEmail: "lettings@example.com",
   },
   {
     title: "Room in Creative Flat Share, Friedrichshain",
@@ -308,7 +308,7 @@ const seeds: Seed[] = [
     amenities: ["Shared kitchen", "Wi-Fi included", "Washing machine", "Balcony"],
     availableFrom: "2026-10-15", lat: 52.5155, lng: 13.454,
     publisherType: "Flatmate", verified: true, status: "Published",
-    publisherName: "Jonas Weber", publisherPhone: "+49 176 2210 4478", publisherEmail: "jonas.weber@example.com",
+    publisherName: "Jonas Weber", publisherPhone: "+49 000 000 000", publisherEmail: "jonas.weber@example.com",
   },
   {
     title: "Modern Office Space at Potsdamer Platz",
@@ -319,7 +319,7 @@ const seeds: Seed[] = [
     amenities: ["Meeting rooms", "24/7 access", "Reception", "Air conditioning", "Parking"],
     availableFrom: "2026-11-01", lat: 52.5096, lng: 13.376,
     publisherType: "Partner", verified: true, status: "Published",
-    publisherName: "Urban Workspace Partners", publisherPhone: "+49 30 9900 1200", publisherEmail: "berlin@example.com",
+    publisherName: "Urban Workspace Partners", publisherPhone: "+49 000 000 000", publisherEmail: "berlin@example.com",
   },
 
   // Munich
@@ -332,7 +332,7 @@ const seeds: Seed[] = [
     amenities: ["Garden", "Garage", "Underfloor heating", "Cellar", "Solar panels"],
     availableFrom: "2027-01-01", lat: 48.15, lng: 11.62,
     publisherType: "Agent", verified: true, status: "Published",
-    publisherName: "Isar Immobilien", publisherPhone: "+49 89 2233 4100", publisherEmail: "sales@example.com",
+    publisherName: "Isar Immobilien", publisherPhone: "+49 000 000 000", publisherEmail: "sales@example.com",
   },
   {
     title: "3BHK with Balcony in Schwabing",
@@ -343,7 +343,7 @@ const seeds: Seed[] = [
     amenities: ["Balcony", "Elevator", "Two bathrooms", "Cellar", "Underground parking"],
     availableFrom: "2026-11-01", lat: 48.165, lng: 11.586,
     publisherType: "Landlord", verified: true, status: "Published",
-    publisherName: "Michael Bauer", publisherPhone: "+49 89 6612 7730", publisherEmail: "m.bauer@example.com",
+    publisherName: "Michael Bauer", publisherPhone: "+49 000 000 000", publisherEmail: "m.bauer@example.com",
   },
   {
     title: "Room Share near LMU",
@@ -354,7 +354,7 @@ const seeds: Seed[] = [
     amenities: ["Wi-Fi included", "Shared kitchen", "Near U-Bahn"],
     availableFrom: "2026-10-01", lat: 48.1508, lng: 11.5805,
     publisherType: "Flatmate", verified: false, status: "Pending",
-    publisherName: "Lena Fischer", publisherPhone: "+49 157 3344 9021", publisherEmail: "lena.fischer@example.com",
+    publisherName: "Lena Fischer", publisherPhone: "+49 000 000 000", publisherEmail: "lena.fischer@example.com",
   },
   {
     title: "Retail Store on Sendlinger Straße",
@@ -365,7 +365,7 @@ const seeds: Seed[] = [
     amenities: ["Display windows", "Storage room", "Air conditioning", "Accessible entrance"],
     availableFrom: "2027-02-01", lat: 48.1352, lng: 11.57,
     publisherType: "Partner", verified: true, status: "Published",
-    publisherName: "Bavaria Retail Estates", publisherPhone: "+49 89 5500 3300", publisherEmail: "retail@example.com",
+    publisherName: "Bavaria Retail Estates", publisherPhone: "+49 000 000 000", publisherEmail: "retail@example.com",
   },
 
   // Hamburg
@@ -378,7 +378,7 @@ const seeds: Seed[] = [
     amenities: ["Water view", "Concierge", "Elevator", "Underground parking", "Loggia"],
     availableFrom: "2026-12-01", lat: 53.5413, lng: 9.997,
     publisherType: "Agent", verified: true, status: "Published",
-    publisherName: "Nordhafen Makler", publisherPhone: "+49 40 3300 7812", publisherEmail: "info@example.com",
+    publisherName: "Nordhafen Makler", publisherPhone: "+49 000 000 000", publisherEmail: "info@example.com",
   },
   {
     title: "Cosy 1BHK in Eimsbüttel",
@@ -389,7 +389,7 @@ const seeds: Seed[] = [
     amenities: ["Fitted kitchen", "Bathtub", "Bike storage", "Cellar"],
     availableFrom: "2026-10-15", lat: 53.575, lng: 9.953,
     publisherType: "Landlord", verified: true, status: "Published",
-    publisherName: "Katrin Hoffmann", publisherPhone: "+49 30 5501 2231", publisherEmail: "k.hoffmann@example.com",
+    publisherName: "Katrin Hoffmann", publisherPhone: "+49 000 000 000", publisherEmail: "k.hoffmann@example.com",
   },
   {
     title: "Industrial Event Hall in Sternschanze",
@@ -400,7 +400,7 @@ const seeds: Seed[] = [
     amenities: ["Sound system", "Lighting rig", "Catering kitchen", "Capacity 250"],
     availableFrom: "2026-09-25", lat: 53.5635, lng: 9.9655,
     publisherType: "Referral", verified: true, status: "Published",
-    publisherName: "Tim Albers", publisherPhone: "+49 171 5566 2201", publisherEmail: "tim.albers@example.com",
+    publisherName: "Tim Albers", publisherPhone: "+49 000 000 000", publisherEmail: "tim.albers@example.com",
   },
   {
     title: "Flat Share Room in Ottensen",
@@ -411,7 +411,7 @@ const seeds: Seed[] = [
     amenities: ["Shared kitchen", "Balcony", "Wi-Fi included"],
     availableFrom: "2026-11-01", lat: 53.552, lng: 9.928,
     publisherType: "Flatmate", verified: false, status: "Draft",
-    publisherName: "Mia Schulz", publisherPhone: "+49 152 7781 3390", publisherEmail: "mia.schulz@example.com",
+    publisherName: "Mia Schulz", publisherPhone: "+49 000 000 000", publisherEmail: "mia.schulz@example.com",
   },
 
   // Frankfurt
@@ -424,7 +424,7 @@ const seeds: Seed[] = [
     amenities: ["Weekly cleaning", "Elevator", "Balcony", "Fibre internet", "Parking"],
     availableFrom: "2026-10-01", lat: 50.118, lng: 8.66,
     publisherType: "Agent", verified: true, status: "Published",
-    publisherName: "Main Residential", publisherPhone: "+49 69 2455 1180", publisherEmail: "rentals@example.com",
+    publisherName: "Main Residential", publisherPhone: "+49 000 000 000", publisherEmail: "rentals@example.com",
   },
   {
     title: "Office Floor near Bankenviertel",
@@ -435,7 +435,7 @@ const seeds: Seed[] = [
     amenities: ["Meeting rooms", "24/7 access", "Reception", "Air conditioning", "Canteen"],
     availableFrom: "2027-01-01", lat: 50.1109, lng: 8.672,
     publisherType: "Partner", verified: true, status: "Published",
-    publisherName: "Skyline Commercial", publisherPhone: "+49 69 7700 4400", publisherEmail: "office@example.com",
+    publisherName: "Skyline Commercial", publisherPhone: "+49 000 000 000", publisherEmail: "office@example.com",
   },
   {
     title: "Investor Studio in Sachsenhausen",
@@ -446,7 +446,7 @@ const seeds: Seed[] = [
     amenities: ["Currently rented", "Cellar", "Near tram"],
     availableFrom: "2026-12-15", lat: 50.1, lng: 8.685,
     publisherType: "Landlord", verified: false, status: "Rejected",
-    publisherName: "Katrin Hoffmann", publisherPhone: "+49 30 5501 2231", publisherEmail: "k.hoffmann@example.com",
+    publisherName: "Katrin Hoffmann", publisherPhone: "+49 000 000 000", publisherEmail: "k.hoffmann@example.com",
     rejectReason: "Photos appear to show a different building. Please upload current photos of the unit.",
   },
   {
@@ -458,7 +458,7 @@ const seeds: Seed[] = [
     amenities: ["Balcony", "Stucco ceilings", "New bathroom", "Cellar"],
     availableFrom: "2026-11-15", lat: 50.126, lng: 8.692,
     publisherType: "Referral", verified: true, status: "Published",
-    publisherName: "Anna Becker", publisherPhone: "+49 160 4432 1876", publisherEmail: "anna.becker@example.com",
+    publisherName: "Anna Becker", publisherPhone: "+49 000 000 000", publisherEmail: "anna.becker@example.com",
   },
 
   // Cologne
@@ -471,7 +471,7 @@ const seeds: Seed[] = [
     amenities: ["Wooden floors", "Fitted kitchen", "Bike storage", "Cellar"],
     availableFrom: "2026-10-01", lat: 50.94, lng: 6.938,
     publisherType: "Landlord", verified: true, status: "Published",
-    publisherName: "Thomas Richter", publisherPhone: "+49 221 7788 2210", publisherEmail: "t.richter@example.com",
+    publisherName: "Thomas Richter", publisherPhone: "+49 000 000 000", publisherEmail: "t.richter@example.com",
   },
   {
     title: "Room Share in Ehrenfeld",
@@ -482,7 +482,7 @@ const seeds: Seed[] = [
     amenities: ["Wi-Fi included", "Shared kitchen", "Near S-Bahn"],
     availableFrom: "2026-09-30", lat: 50.95, lng: 6.918,
     publisherType: "Flatmate", verified: false, status: "Published",
-    publisherName: "Elif Yilmaz", publisherPhone: "+49 178 9900 3312", publisherEmail: "elif.yilmaz@example.com",
+    publisherName: "Elif Yilmaz", publisherPhone: "+49 000 000 000", publisherEmail: "elif.yilmaz@example.com",
   },
   {
     title: "Townhouse in Lindenthal",
@@ -493,7 +493,7 @@ const seeds: Seed[] = [
     amenities: ["Garden", "Fireplace", "Attic office", "Garage"],
     availableFrom: "2027-03-01", lat: 50.93, lng: 6.905,
     publisherType: "Agent", verified: true, status: "Pending",
-    publisherName: "Rheinland Estates", publisherPhone: "+49 221 4400 5500", publisherEmail: "koeln@example.com",
+    publisherName: "Rheinland Estates", publisherPhone: "+49 000 000 000", publisherEmail: "koeln@example.com",
   },
   {
     title: "Riverside Event Hall in Deutz",
@@ -504,7 +504,7 @@ const seeds: Seed[] = [
     amenities: ["River view", "AV equipment", "Catering kitchen", "Capacity 400", "Parking"],
     availableFrom: "2026-10-10", lat: 50.938, lng: 6.975,
     publisherType: "Partner", verified: true, status: "Published",
-    publisherName: "Rhein Venues", publisherPhone: "+49 221 1200 8800", publisherEmail: "events@example.com",
+    publisherName: "Rhein Venues", publisherPhone: "+49 000 000 000", publisherEmail: "events@example.com",
   },
 
   // Stuttgart
@@ -517,7 +517,7 @@ const seeds: Seed[] = [
     amenities: ["Elevator", "Fitted kitchen", "Fibre internet"],
     availableFrom: "2026-10-01", lat: 48.7784, lng: 9.18,
     publisherType: "Landlord", verified: true, status: "Pending",
-    publisherName: "Katrin Hoffmann", publisherPhone: "+49 30 5501 2231", publisherEmail: "k.hoffmann@example.com",
+    publisherName: "Katrin Hoffmann", publisherPhone: "+49 000 000 000", publisherEmail: "k.hoffmann@example.com",
   },
   {
     title: "Boutique Store in Stuttgart-West",
@@ -528,7 +528,7 @@ const seeds: Seed[] = [
     amenities: ["Corner unit", "Display windows", "Storage room"],
     availableFrom: "2026-12-01", lat: 48.775, lng: 9.155,
     publisherType: "Referral", verified: true, status: "Published",
-    publisherName: "Felix Braun", publisherPhone: "+49 162 5543 7719", publisherEmail: "felix.braun@example.com",
+    publisherName: "Felix Braun", publisherPhone: "+49 000 000 000", publisherEmail: "felix.braun@example.com",
   },
   {
     title: "2BHK with Garden in Degerloch",
@@ -539,7 +539,7 @@ const seeds: Seed[] = [
     amenities: ["Private garden", "Parking space", "Cellar", "Accessible"],
     availableFrom: "2027-01-15", lat: 48.748, lng: 9.17,
     publisherType: "Agent", verified: true, status: "Draft",
-    publisherName: "Schwaben Wohnen", publisherPhone: "+49 711 9988 1100", publisherEmail: "verkauf@example.com",
+    publisherName: "Schwaben Wohnen", publisherPhone: "+49 000 000 000", publisherEmail: "verkauf@example.com",
   },
   {
     title: "Hillside Villa in Killesberg",
@@ -550,7 +550,7 @@ const seeds: Seed[] = [
     amenities: ["City view", "Pool", "Terrace", "Double garage", "Smart home"],
     availableFrom: "2027-02-01", lat: 48.796, lng: 9.17,
     publisherType: "Partner", verified: true, status: "Published",
-    publisherName: "Premium Estates Süd", publisherPhone: "+49 711 5000 2020", publisherEmail: "premium@example.com",
+    publisherName: "Premium Estates Süd", publisherPhone: "+49 000 000 000", publisherEmail: "premium@example.com",
   },
 ];
 

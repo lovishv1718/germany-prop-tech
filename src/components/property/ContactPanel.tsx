@@ -200,7 +200,7 @@ export default function ContactPanel({ property }: { property: Property }) {
             {/* Placeholder values only: the real contact details are not rendered until unlocked. */}
             <div className="flex items-center gap-3 rounded-btn border border-line px-3.5 py-3" aria-hidden="true">
               <Phone className="h-4 w-4 text-slate-400" />
-              <span className="select-none font-semibold text-navy blur-[5px]">+49 176 4821 9930</span>
+              <span className="select-none font-semibold text-navy blur-[5px]">+49 000 000 000</span>
             </div>
             <div className="flex items-center gap-3 rounded-btn border border-line px-3.5 py-3" aria-hidden="true">
               <Mail className="h-4 w-4 text-slate-400" />

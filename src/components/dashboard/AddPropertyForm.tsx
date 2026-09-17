@@ -291,7 +291,7 @@ export default function AddPropertyForm() {
             </div>
             <div>
               <Label htmlFor="street">Street and number (optional)</Label>
-              <Input id="street" value={f.street} onChange={(e) => set("street", e.target.value)} placeholder="Kastanienallee 12" />
+              <Input id="street" value={f.street} onChange={(e) => set("street", e.target.value)} placeholder="Street and house number" />
               <p className="mt-1.5 text-sm text-slate-500">Never shown publicly. Tenants see an approximate area on the map.</p>
             </div>
             {f.city && <p className="rounded-btn bg-sand px-4 py-3 text-sm text-slate-600">State: <span className="font-medium text-navy">{CITY_STATE[f.city]}</span></p>}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowRight, Building2, Code, FileSpreadsheet, HardHat, Link2, Plane, UsersRound } from "lucide-react";
 import PartnerForm from "@/components/pages/PartnerForm";
+import PartnerSyncCard from "@/components/pages/PartnerSyncCard";
 import { ButtonLink } from "@/components/ui/Button";
 import PageIntro from "@/components/ui/PageIntro";
 import { Highlight } from "@/components/ui/Scribble";
@@ -12,10 +13,10 @@ export const metadata: Metadata = {
 };
 
 const STATS = [
-  { value: "12.480", label: "Registered tenants and buyers" },
-  { value: "6", label: "Major German cities" },
-  { value: "42s", label: "Average alert delivery" },
-  { value: "24h", label: "Listing review time" },
+  { value: "6", label: "Launch cities" },
+  { value: "24h", label: "Listing review" },
+  { value: "3", label: "Integration options" },
+  { value: "EU", label: "Hosted, GDPR ready" },
 ];
 
 const PARTNER_TYPES = [
@@ -46,21 +47,24 @@ export default function PartnerPage() {
     <>
       <section className="border-b border-line">
         <div className="mx-auto max-w-7xl px-4 pb-16 pt-12 sm:px-6 sm:pt-16 lg:px-8">
-          <div className="max-w-3xl">
-            <PageIntro
-              note="For agencies and partners"
-              lead="Grow with Germany's verified property"
-              highlight="marketplace"
-              description="Connect your listings once and reach tenants, buyers and flatmates in six cities. Every enquiry comes from a signed-in, contactable person."
-            />
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href="#apply" variant="primary" size="lg">
-                Apply to partner <ArrowRight className="h-4 w-4" />
-              </ButtonLink>
-              <ButtonLink href="#integrations" variant="outline" size="lg">
-                See integration options
-              </ButtonLink>
+          <div className="grid items-center gap-14 lg:grid-cols-[1.15fr_1fr] lg:gap-12">
+            <div className="max-w-3xl">
+              <PageIntro
+                note="For agencies and partners"
+                lead="Grow with Germany's verified property"
+                highlight="marketplace"
+                description="Connect your listings once and reach tenants, buyers and flatmates in six cities. Every enquiry comes from a signed-in, contactable person."
+              />
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <ButtonLink href="#apply" variant="primary" size="lg">
+                  Apply to partner <ArrowRight className="h-4 w-4" />
+                </ButtonLink>
+                <ButtonLink href="#integrations" variant="outline" size="lg">
+                  See integration options
+                </ButtonLink>
+              </div>
             </div>
+            <PartnerSyncCard />
           </div>
           <ul className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-card border border-line/80 bg-line shadow-card lg:grid-cols-4">
             {STATS.map((s) => (

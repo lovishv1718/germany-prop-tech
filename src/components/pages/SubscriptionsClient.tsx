@@ -35,7 +35,7 @@ export default function SubscriptionsClient() {
   const [types, setTypes] = useState<string[]>([]);
   const [maxBudget, setMaxBudget] = useState("");
   const [plan, setPlan] = useState<PlanId>(params.get("plan") === "monthly" ? "monthly" : "quarterly");
-  const [whatsapp, setWhatsapp] = useState("+49 151 2345 6789");
+  const [whatsapp, setWhatsapp] = useState("+49 000 000 000");
   const [consent, setConsent] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [checkoutOpen, setCheckoutOpen] = useState(false);
